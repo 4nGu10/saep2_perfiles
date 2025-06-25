@@ -27,29 +27,37 @@ public class VistaLogin {
                                 Model model, HttpSession session) {
         Usuarios usuario = usuarioRepository.findByNumeroAndClave(username, password);
 
-        String nombreRol = null;
         if (usuario != null) {
-            nombreRol = usuario.getRol().getRoles();
 
-            // ★ AQUÍ GUARDAMOS EL USUARIO EN LA SESIÓN ★
-            session.setAttribute("usuarioLogueado", usuario);
-            session.setAttribute("idUsuarioLogueado", usuario.getId_usuarios());
+            if ("Activo".equalsIgnoreCase(usuario.getEstado())) {
+                String nombreRol = usuario.getRol().getRoles();
 
-            // Redirección según el rol
-            switch (nombreRol.trim().toUpperCase()) {
-                case "ADMINISTRADOR DEL SISTEMA":
-                    return "redirect:/vista/empresas";
-                case "EVALUADOR":
-                    return "redirect:/vista/empresas";
-                case "APRENDIZ":
-                    return "redirect:/vista/aprendiz";
-                default:
-                    model.addAttribute("error", "Rol no reconocido: " + nombreRol);
-                    return "login";
+                session.setAttribute("usuarioLogueado", usuario);
+                session.setAttribute("idUsuarioLogueado", usuario.getId_usuarios());
+                session.setAttribute("nombreRol", usuario.getRol().getRoles());
+                System.out.println("USUARIO: " + usuario);
+                System.out.println("ROL: " + (usuario != null ? usuario.getRol() : "null"));
+
+
+                switch (nombreRol.trim().toUpperCase()) {
+                    case "ADMINISTRADOR DEL SISTEMA":
+                        return "redirect:/menu";
+                    case "EVALUADOR":
+                        return "redirect:/vista/empresas";
+                    case "APRENDIZ":
+                        return "redirect:/menu";
+                    default:
+                        model.addAttribute("error", "Rol no reconocido: " + nombreRol);
+                        return "login";
+                }
+
+            } else {
+                model.addAttribute("error", "Usuario inactivo");
+                return "login";
             }
-        } else {
-           model.addAttribute("error", "Usuario o contraseña incorrectos");
 
+        } else {
+            model.addAttribute("error", "Usuario o contraseña incorrectos");
             return "login";
         }
     }
