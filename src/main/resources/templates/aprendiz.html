@@ -24,19 +24,22 @@
     </div>
 
     <nav class="nav flex-column">
-        <a class="nav-link text-white" th:href="@{/vista/aprendices}">📋 Aprendices</a>
-        <a class="nav-link text-white" th:href="@{/vista/fichas}">📋 Fichas</a>
-        <a class="nav-link text-white" th:href="@{/vista/empresas}">🏢 Empresas</a>
-        <a class="nav-link text-white" th:href="@{/vista/modalidades}">⚔️ Modalidad</a>
-        <a class="nav-link text-white" th:href="@{/vista/novedades}">💾 Novedades</a>
-        <a class="nav-link text-white" th:href="@{/vista/programas}">🛠️ Programas</a>
-        <a class="nav-link text-white" th:href="@{/vista/rol}">📎 Roles</a>
-        <a class="nav-link text-white" th:href="@{/vista/sedes}">🖼️ Sede</a>
-        <a class="nav-link text-white" th:href="@{/vista/seguimiento}">📡 Seguimiento</a>
-        <a class="nav-link text-white" th:href="@{/vista/usuarios}">👥 Usuario</a>
-        <a class="nav-link text-white" th:href="@{/vista/editarperfil}">👤 Mi Perfil</a>
+        <a class="nav-link text-white" th:href="@{/vista/aprendiz}">🏠 Inicio</a>
 
+        <!-- Botón de submenú desplegable -->
+        <a class="nav-link text-white" data-bs-toggle="collapse" href="#submenuUsuarios" role="button" aria-expanded="false" aria-controls="submenuUsuarios">
+            👥 Usuarios ▾
+        </a>
+        <div class="collapse" id="submenuUsuarios">
+            <nav class="nav flex-column ms-3">
+                <a class="nav-link text-white" th:href="@{/vista/usuarios}">📚 Formatos</a>
+                <a class="nav-link text-white" th:href="@{/vista/usuarios/aprendices}">©️ #147</a>
+                <a class="nav-link text-white" th:href="@{/vista/usuarios/evaluadores}">©️ #023</a>
+            </nav>
+        </div>
     </nav>
+    <a class="nav-link text-white" th:href="@{/vista/editarperfil}">🤵🏻 Perfil</a>
+    vista/editarperfil
 </div>
 
 <!-- Contenido principal -->

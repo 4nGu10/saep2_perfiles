@@ -38,7 +38,13 @@ public class VistaLogin {
             // Redirección según el rol
             switch (nombreRol.trim().toUpperCase()) {
                 case "ADMINISTRADOR DEL SISTEMA":
-                    return "redirect:/vista/empresas";
+                    return "redirect:/inicioAdmin";
+                case "ADMINISTRADOR":
+                    return "redirect:/inicioAdmin";
+                case "AUXILIAR":
+                    return "redirect:/inicioAdmin";
+                case "COEVALUADOR":
+                    return "redirect:/vista/aprendiz";
                 case "EVALUADOR":
                     return "redirect:/vista/empresas";
                 case "APRENDIZ":
