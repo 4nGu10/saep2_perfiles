@@ -46,7 +46,7 @@ public class VistaLogin {
                 case "COEVALUADOR":
                     return "redirect:/vista/aprendiz";
                 case "EVALUADOR":
-                    return "redirect:/vista/empresas";
+                    return "redirect:/inicioEvaluador";
                 case "APRENDIZ":
                     return "redirect:/vista/aprendiz";
                 default:

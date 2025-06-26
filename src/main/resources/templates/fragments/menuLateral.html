@@ -1,0 +1,45 @@
+<!-- templates/fragments/menu-lateral.html -->
+<div th:fragment="sidebar"
+     id="sidebar"
+     style="background-color: #39A900; min-height: 100vh; width: 220px; position: fixed; top: 0; left: 0; z-index: 1000;">
+    <div class="text-center mb-4">
+        <img th:src="@{/img/logo_sena_n.png}" alt="Logo SENA" height="100" style="margin-top: 30px;">
+    </div>
+
+    <div th:switch="${usuario.rol.roles.toUpperCase()}">
+
+        <!-- ADMINISTRADORES -->
+        <nav class="nav flex-column"
+             th:case="'ADMINISTRADOR DEL SISTEMA', 'ADMINISTRADOR', 'AUXILIAR'">
+            <a class="nav-link text-white" th:href="@{/vista/aprendices}">📋 Aprendices</a>
+            <a class="nav-link text-white" th:href="@{/vista/fichas}">📋 Fichas</a>
+            <a class="nav-link text-white" th:href="@{/vista/empresas}">🏢 Empresas</a>
+            <a class="nav-link text-white" th:href="@{/vista/modalidades}">⚔️ Modalidad</a>
+            <a class="nav-link text-white" th:href="@{/vista/novedades}">💾 Novedades</a>
+            <a class="nav-link text-white" th:href="@{/vista/programas}">🛠️ Programas</a>
+            <a class="nav-link text-white" th:href="@{/vista/rol}">📎 Roles</a>
+            <a class="nav-link text-white" th:href="@{/vista/sedes}">🖼️ Sede</a>
+            <a class="nav-link text-white" th:href="@{/vista/seguimiento}">📡 Seguimiento</a>
+            <a class="nav-link text-white" th:href="@{/vista/usuarios}">👥 Usuarios</a>
+            <a class="nav-link text-white" th:href="@{/vista/editarperfil}">👤 Mi Perfil</a>
+        </nav>
+
+        <!-- APRENDIZ -->
+        <nav class="nav flex-column" th:case="'APRENDIZ'">
+            <a class="nav-link text-white" th:href="@{/vista/aprendiz}">🏠 Inicio</a>
+            <a class="nav-link text-white" data-bs-toggle="collapse" href="#submenuUsuarios">📚 Formatos</a>
+            <div class="collapse" id="submenuUsuarios">
+                <a class="nav-link text-white ms-3" th:href="@{/vista/usuarios/aprendices}">©️ #147</a>
+                <a class="nav-link text-white ms-3" th:href="@{/vista/usuarios/evaluadores}">©️ #023</a>
+                <a class="nav-link text-white ms-3" th:href="@{/vista/editarperfil}">👤 Mi Perfil</a>
+            </div>
+        </nav>
+
+        <!-- EVALUADOR -->
+        <nav class="nav flex-column" th:case="'EVALUADOR'">
+            <a class="nav-link text-white" th:href="@{/inicioAdmin}">🏠 Inicio</a>
+            <a class="nav-link text-white" href="#">🧑🏾‍🧑🏻‍👧 Aprendices Asignados</a>
+            <a class="nav-link text-white" th:href="@{/vista/editarperfil}">👤 Mi Perfil</a>
+        </nav>
+    </div>
+</div>

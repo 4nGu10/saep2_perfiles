@@ -30,19 +30,18 @@ public class VistaEditarPerfil {
     @Autowired
     private EmpresasRepository empresasRepository;
 
-
-
     @GetMapping("/vista/editarperfil")
     public String editarPerfil(Model model, HttpSession session) {
         Usuarios usuario = (Usuarios) session.getAttribute("usuarioLogueado");
 
         // Verificamos si hay un usuario logueado
         if (usuario == null) {
-            // Redirige al login si no hay sesión
             return "redirect:/login"; // Cambia esto si tu login está en otra ruta
         }
 
-        model.addAttribute("usuarios", usuario);
+        // Agregar ambos nombres para que funcionen el formulario y el menú
+        model.addAttribute("usuarios", usuario); // para el formulario
+        model.addAttribute("usuario", usuario);  // para el menú lateral
 
         if (usuario.getId_rol() == 1) {
             Aprendices aprendiz = aprendicesRepository.findByIdUsuario(usuario.getId_usuarios());
@@ -52,9 +51,9 @@ public class VistaEditarPerfil {
             model.addAttribute("listaEmpresas", empresasRepository.findAll());
         }
 
-
         return "editarperfil";
     }
+
 
     @GetMapping("/vistaEditar/editar/{id}")
     public String editar(@PathVariable Long id, Model model, HttpSession session) {
